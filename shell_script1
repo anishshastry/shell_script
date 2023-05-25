@@ -1,0 +1,27 @@
+ #!/bin/bash
+
+ # script to verify db listener is running or not
+
+ # oracle home path
+   ORACLE_HOME="/u04/app/oracle/product/19c/db_1 /smg1"
+
+ # listener SID
+  LISTENER_NAME="bnglr"
+
+ # mail id to get alert
+   ALERT_EMAIL="ashastry@qual3.com"
+
+
+ # checks for the listener status
+  LISTENER_STATUS=$(lsnrctl status ${LISTENER_NAME} )
+
+  if [ -z "$LISTENER_STATUS" ]; then
+
+ # will send mail notification
+
+  echo "DB listener is not running! sending mail to $ALERT_EMAIL... "
+  echo "Subject: DB listener alert! DB listener is not running!" | sendmail -v $ALERT_MAIL
+
+
+  fi
+
